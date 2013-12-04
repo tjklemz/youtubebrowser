@@ -4,3 +4,58 @@ body {
   padding-top: 20px;
 }
 
+.slide {
+  overflow: hidden;
+  color: black;
+}
+
+.slide.ng-enter {
+  transition: all 0.5s ease-in-out;
+  max-height: 0;
+}
+ .slide.ng-leave {
+  transition: all 0.5s ease-in-out;
+  max-height: 100px;
+}
+.slide.ng-leave.ng-leave-active {
+  max-height: 0;
+  color: red;
+}
+.slide.ng-enter.ng-enter-active {
+  max-height: 100px;
+  color: blue;
+}
+
+.ng-hide {
+  display:none!important;
+}
+.ng-hide-add, .ng-hide-remove {
+  display:block!important;
+}
+
+.video {
+  margin-bottom: 20px;
+}
+
+.video-preview {
+  width: 150px;
+  float: left;
+  margin-right: 10px;
+}
+
+#videos {
+  padding-left: 50px;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: black;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}

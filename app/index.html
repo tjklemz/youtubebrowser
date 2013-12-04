@@ -1,12 +1,15 @@
 <!doctype html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en" ng-app="app">
 <head>
   <meta charset="utf-8">
-  <title>Google Phone Gallery</title>
-  <link rel="stylesheet" href="css/app.css">
+  <title>YouTube Listing</title>
   <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-animate.js"></script>
   <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
 </head>
 <body ng-controller="PhoneListCtrl">
 
@@ -14,25 +17,29 @@
     <div class="row-fluid">
       <div class="span2">
         <!--Sidebar content-->
-
-        Search: <input ng-model="query">
-        Sort by:
-        <select ng-model="orderProp">
-          <option value="name">Alphabetical</option>
-          <option value="age">Newest</option>
-        </select>
+        <form>
+        User ID: <input ng-model="userID">
+        <button ng-click="findVideos()">Find Videos</button>
+        <button ng-click="next()">More Videos</button>
+        </form>
+        Search: <input ng-model="search">
 
       </div>
       <div class="span10">
         <!--Body content-->
 
-        <ul class="phones">
-          <li ng-repeat="phone in phones | filter:query | orderBy:orderProp">
-            {{phone.name}}
-            <p>{{phone.snippet}}</p>
-          </li>
-        </ul>
-
+        <div id="videos" ng-switch on="videos.length > 0">
+          <ul ng-switch-when="true" class="videos">
+            <li class="slide video" ng-repeat="video in videos | ripper:search">
+              <a target="_blank" href="{{video.media$group.media$player[0].url}}">
+                <img class="video-preview" src="{{video.previewImg}}" alt="Day {{day}}">
+                <h3>{{video.title.$t}}</h3>
+                <p>{{video.content.$t}}</p>
+              </a>
+            </li>
+          </ul>
+          <h2 ng-switch-default>Sorry, no videos.</h2>
+        </div>
       </div>
     </div>
   </div>
